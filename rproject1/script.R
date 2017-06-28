@@ -48,5 +48,5 @@ CrossTable(wbcd_test_label, wbcd_pred1, prop.chisq = FALSE)
 seed <- 9070
 set.seed(seed)
 cs_split <- createFolds(wbcd_label, k = 10, returnTrain = TRUE)
-
+#test cross validation
 
