@@ -49,4 +49,17 @@ seed <- 9070
 set.seed(seed)
 cs_split <- createFolds(wbcd_label, k = 10, returnTrain = TRUE)
 #test cross validation
+knn_cros <- function(train_set,data_ftr,data_class) {
+    trf <- data_ftr[train_set,]
+    trl <- data_class[train_set]
+    tef <- data_ftr[-train_set,]
+    tel <- data_class[-train_set]
+    pre <- knn(trf, tef, trl, 21)
+    CrossTable(tel, pre, prop.chisq = FALSE, prop.c = FALSE, prop.r = FALSE, prop.t = FALSE)
+}
+knn_cros(train_set,wbcd_ftr,wbcd_label)
+knn_cros(cs_split$Fold01, wbcd_ftr, wbcd_label)
 
+for (m in cs_split) {
+    knn_cros(m, wbcd_ftr, wbcd_label)
+}
